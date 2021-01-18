@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import React, {Component} from 'react';
-import {AccessibilityInfo, PanResponder, Animated, View, Text, Image} from 'react-native';
+import {AccessibilityInfo, PanResponder, Animated, View, Text, Image, TouchableOpacity} from 'react-native';
 import PropTypes from 'prop-types';
 import XDate from 'xdate';
 import {CALENDAR_KNOB} from '../testIDs';
@@ -463,10 +463,20 @@ class ExpandableCalendar extends Component {
   renderKnob() {
     // TODO: turn to TouchableOpacity with onPress that closes it
     return (
-      <View style={this.style.knobContainer} pointerEvents={'none'} testID={`${this.props.testID}-knob`}>
+      <TouchableOpacity style={this.style.knobContainer} pointerEvents={'none'} testID={`${this.props.testID}-knob`}
+        onPress={() => {
+          setTimeout(() => { // to allows setDate to be completed
+            this.bounceToPosition(this.state.position === POSITIONS.OPEN ? this.closedHeight : this.openHeight);
+          }, 0);
+        }}>
         <View style={this.style.knob} testID={CALENDAR_KNOB} />
-      </View>
+      </TouchableOpacity>
     );
+//     return (
+//       <View style={this.style.knobContainer} pointerEvents={'none'} testID={`${this.props.testID}-knob`}>
+//         <View style={this.style.knob} testID={CALENDAR_KNOB} />
+//       </View>
+//     );
   }
 
   renderArrow = direction => {
