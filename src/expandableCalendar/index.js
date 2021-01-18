@@ -462,6 +462,8 @@ class ExpandableCalendar extends Component {
 
   renderKnob() {
     // TODO: turn to TouchableOpacity with onPress that closes it
+    const { position } = this.state;
+    const isOpen = position === POSITIONS.OPEN;
     return (
       <TouchableOpacity style={this.style.knobContainer} pointerEvents={'none'} testID={`${this.props.testID}-knob`}
         onPress={() => {
@@ -469,7 +471,12 @@ class ExpandableCalendar extends Component {
             this.bounceToPosition(this.state.position === POSITIONS.OPEN ? this.closedHeight : this.openHeight);
           }, 0);
         }}>
-        <View style={this.style.knob} testID={CALENDAR_KNOB} />
+//         <View style={this.style.knob} testID={CALENDAR_KNOB} />
+      <Image source={
+          isOpen
+            ? this.props.leftArrowImageSource
+            : this.props.rightArrowImageSource
+        }></Image>
       </TouchableOpacity>
     );
 //     return (
