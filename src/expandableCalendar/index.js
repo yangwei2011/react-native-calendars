@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import React, {Component} from 'react';
+import React, {Component, PureComponent} from 'react';
 import {AccessibilityInfo, PanResponder, Animated, View, Text, Image, TouchableOpacity} from 'react-native';
 import PropTypes from 'prop-types';
 import XDate from 'xdate';
@@ -35,7 +35,7 @@ const DAY_NAMES_PADDING = 24;
  * @extendslink: docs/CalendarList
  * @example: https://github.com/wix/react-native-calendars/blob/master/example/src/screens/expandableCalendar.js
  */
-class ExpandableCalendar extends Component {
+class ExpandableCalendar extends PureComponent {
   static displayName = 'ExpandableCalendar';
 
   static propTypes = {
