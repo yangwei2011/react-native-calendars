@@ -2,7 +2,7 @@ import _ from 'lodash';
 import PropTypes from 'prop-types';
 import XDate from 'xdate';
 import React, {Component} from 'react';
-import {FlatList, Platform, Dimensions, View} from 'react-native';
+import {FlatList, Platform, Dimensions, View, DeviceEventEmitter} from 'react-native';
 import {extractComponentProps} from '../component-updater';
 import {xdateToData, parseDate} from '../interface';
 import dateutils from '../dateutils';
@@ -212,6 +212,8 @@ class CalendarList extends Component {
     function rowIsCloseToViewable(index, distance) {
       for (let i = 0; i < viewableItems.length; i++) {
         if (Math.abs(index - parseInt(viewableItems[i].index)) <= distance) {
+          //通知
+          DeviceEventEmitter.emit('ScrollCalendar', viewableItems);
           return true;
         }
       }
